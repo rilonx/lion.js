@@ -28,6 +28,8 @@ window.addEventListener('load', function(){
         requestAnimationFrame(loop);
     }
 
-    tick();
+    if (NODE_ENV == 'development') {
+        tick();
+    }
 
 });
