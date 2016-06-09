@@ -8,28 +8,37 @@ window.addEventListener('load', function(){
 
     let ctx = gameCanvas.getCtx();
 
-    let loop = function(){
+    let draw = () => {
 
         //for(let i = 0; i < 10; i++){
-            let vector1 = new Vector(ctx, Math.random()*800, Math.random()*800, Math.random()*100, Math.random()*100);
-            vector1.draw(2, 'tomato');
+        let vector1 = new Vector(ctx, Math.random()*800, Math.random()*800, Math.random()*100, Math.random()*100);
+        vector1.draw(2, 'tomato');
 
-            let vector2 = new Vector(ctx, Math.random()*800, Math.random()*800, Math.random()*100, Math.random()*100);
-            vector2.draw(2, 'blue');
+        let vector2 = new Vector(ctx, Math.random()*800, Math.random()*800, Math.random()*100, Math.random()*100);
+        vector2.draw(2, 'blue');
 
-            let vector3 = new Vector(ctx, Math.random()*800, Math.random()*800, Math.random()*100, Math.random()*100);
-            vector3.draw(2, 'green');
+        let vector3 = new Vector(ctx, Math.random()*800, Math.random()*800, Math.random()*100, Math.random()*100);
+        vector3.draw(2, 'green');
         //}
-
-        tick();
     };
 
-    function tick(){
-        requestAnimationFrame(loop);
-    }
+    let tick = (function(){
+        return requestAnimationFrame ||
+            webkitRequestAnimationFrame ||
+            mozRequestAnimationFrame ||
+            oRequestAnimationFrame ||
+            msRequestAnimationFrame ||
+            function(callback){
+                setTimeout(callback, 1000 / 60);
+            };
+    })();
 
-    if (NODE_ENV == 'development') {
-        tick();
-    }
+    let loop = function(){
+
+        draw();
+        tick(loop);
+    };
+
+    tick(loop);
 
 });
