@@ -5,6 +5,16 @@ window.addEventListener('load', function(){
 
     const gameCanvas = new Canvas('canvas', 800, 600);
     gameCanvas.add('app');
+    let pause = true;
+
+    document.addEventListener('keydown', function(event){
+
+        if (event.keyCode == 80) {
+
+            pause =! pause;
+            tick(loop);
+        }
+    });
 
     let ctx = gameCanvas.getCtx();
 
@@ -35,8 +45,10 @@ window.addEventListener('load', function(){
 
     let loop = function(){
 
-        draw();
-        tick(loop);
+        if (!pause) {
+            draw();
+            tick(loop);
+        }
     };
 
     tick(loop);
