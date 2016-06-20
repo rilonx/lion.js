@@ -1,56 +1,52 @@
 import Canvas from './Canvas.js'
-import Vector from './Vector.js'
+import Game from './Game.js'
+import Keyboard from './Keyboard.js'
 
 window.addEventListener('load', function(){
 
-    const gameCanvas = new Canvas('canvas', 800, 600);
-    gameCanvas.add('app');
-    let pause = true;
+    const gameCanvas = new Canvas('canvas', 800, 600).add('app');
+
+    let game = new Game().init();
+    let keys = new Keyboard().init();
+    let ctx = gameCanvas.getCtx();
+    let odd = {};
+
+    game.draw(odd);
 
     document.addEventListener('keydown', function(event){
 
         if (event.keyCode == 80) {
-
-            pause =! pause;
-            tick(loop);
+            game.setPause();
         }
     });
 
-    let ctx = gameCanvas.getCtx();
+    let x = 50;
+    let y = 50;
+    let str = 'ИГОРЕК';
+    ctx.fillStyle = 'red';
+    ctx.font="30px Arial";
 
-    let draw = () => {
-
-        //for(let i = 0; i < 10; i++){
-        let vector1 = new Vector(ctx, Math.random()*800, Math.random()*800, Math.random()*100, Math.random()*100);
-        vector1.draw(2, 'tomato');
-
-        let vector2 = new Vector(ctx, Math.random()*800, Math.random()*800, Math.random()*100, Math.random()*100);
-        vector2.draw(2, 'blue');
-
-        let vector3 = new Vector(ctx, Math.random()*800, Math.random()*800, Math.random()*100, Math.random()*100);
-        vector3.draw(2, 'green');
-        //}
-    };
-
-    let tick = (function(){
-        return requestAnimationFrame ||
-            webkitRequestAnimationFrame ||
-            mozRequestAnimationFrame ||
-            oRequestAnimationFrame ||
-            msRequestAnimationFrame ||
-            function(callback){
-                setTimeout(callback, 1000 / 60);
-            };
-    })();
-
-    let loop = function(){
-
-        if (!pause) {
-            draw();
-            tick(loop);
+    odd.go = function(){
+        if(keys.keyState[3]){
+            ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
+            ctx.fillText(str,x,y);
+            y +=2;
+        }
+        if(keys.keyState[2]){
+            ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
+            ctx.fillText(str,x,y);
+            y -=2;
+        }
+        if(keys.keyState[0]){
+            ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
+            ctx.fillText(str,x,y);
+            x -=2;
+        }
+        if(keys.keyState[1]){
+            ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
+            ctx.fillText(str,x,y);
+            x +=2;
         }
     };
-
-    tick(loop);
 
 });

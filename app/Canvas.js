@@ -7,13 +7,16 @@ export default class Canvas {
         this.canvas.width = width;
         this.canvas.height = height;
 
-        this.getCtx = () => {
+        this.getCtx = function() {
             return this.canvas.getContext('2d');
         };
 
-        this.add = (parentId) => {
+        this.add = function(parentId) {
             let parent = document.getElementById(parentId);
             parent.appendChild(this.canvas);
-        }
+            return this;
+        };
+
+        return this;
     }
 };
