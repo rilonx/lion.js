@@ -12,7 +12,6 @@ window.addEventListener('load', function(){
     assets.load(["app/assets/hero-1.png", "app/assets/hero-1.json"]).then(() => {
         // End loading assets
         // Main game code
-
         const gameCanvas = new Canvas('canvas', 800, 600).add('app');
 
         let game = new Game().init();
@@ -34,29 +33,57 @@ window.addEventListener('load', function(){
         let str = 'ИГРОК';
         ctx.fillStyle = 'red';
         ctx.font="30px Arial";
+        let image = assets["app/assets/hero-1.png"];
 
         odd.go = function(){
             if(keys.keyState[3]){
+                let frame = assets[16].frame;
                 ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-                ctx.fillText(str,x,y);
+                ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, x, y, frame.w, frame.h);
                 y +=2;
             }
             if(keys.keyState[2]){
+                let frame = assets[10].frame;
                 ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-                ctx.fillText(str,x,y);
+                ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, x,y,frame.w, frame.h);
                 y -=2;
             }
             if(keys.keyState[0]){
+                let frame = assets[25].frame;
                 ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-                ctx.fillText(str,x,y);
+                ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, x,y,frame.w, frame.h);
                 x -=2;
             }
             if(keys.keyState[1]){
+                let frame = assets[0].frame;
                 ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-                ctx.fillText(str,x,y);
+                ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, x,y,frame.w, frame.h);
                 x +=2;
             }
         };
+
+        //odd.go = function(){
+        //    if(keys.keyState[3]){
+        //        ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
+        //        ctx.fillText(str,x,y);
+        //        y +=2;
+        //    }
+        //    if(keys.keyState[2]){
+        //        ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
+        //        ctx.fillText(str,x,y);
+        //        y -=2;
+        //    }
+        //    if(keys.keyState[0]){
+        //        ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
+        //        ctx.fillText(str,x,y);
+        //        x -=2;
+        //    }
+        //    if(keys.keyState[1]){
+        //        ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
+        //        ctx.fillText(str,x,y);
+        //        x +=2;
+        //    }
+        //};
 
     });
 
