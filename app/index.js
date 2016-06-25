@@ -17,9 +17,9 @@ window.addEventListener('load', function(){
         let game = new Game().init();
         let keys = new Keyboard().init();
         let ctx = gameCanvas.getCtx();
-        let odd = {};
+        let handlers = {};
 
-        game.draw(odd);
+        game.draw(handlers);
 
         document.addEventListener('keydown', function(event){
 
@@ -30,12 +30,16 @@ window.addEventListener('load', function(){
 
         let x = 50;
         let y = 50;
-        let str = 'ИГРОК';
+        let str = 'Lex';
         ctx.fillStyle = 'red';
-        ctx.font="30px Arial";
+        ctx.font="12px arial";
         let image = assets["app/assets/hero-1.png"];
 
-        odd.go = function(){
+        function drawHero(){
+
+        }
+
+        handlers.goHero = function(){
             if(keys.keyState[3]){
                 let frame = assets[16].frame;
                 ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
@@ -61,6 +65,11 @@ window.addEventListener('load', function(){
                 x +=2;
             }
         };
+
+        handlers.setText = function(){
+            ctx.fillText(str,x,y-10);
+        };
+
 
         //odd.go = function(){
         //    if(keys.keyState[3]){

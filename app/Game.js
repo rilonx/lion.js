@@ -2,7 +2,7 @@ export default class Game {
 
     constructor() {
 
-        this.pause = true;
+        this.pause = false;
         this.drawFunctions = null;
 
         this.setPause = function(){
@@ -17,15 +17,6 @@ export default class Game {
                     objArr[key]();
                 }
             }
-        };
-
-        this.update = function(objArr){
-            setInterval(function(){
-                for (let key in objArr) {
-
-                    objArr[key]();
-                }
-            },250);
         };
 
         this.init = function(){
