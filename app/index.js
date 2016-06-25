@@ -11,7 +11,10 @@ window.addEventListener('load', function(){
     assets.load(["app/assets/hero-1.png", "app/assets/hero-1.json"]).then(() => {
 
         // Main game code
+        const backgroundCanvas = new Canvas('BackgroundCanvas', 800, 600).add('app');
         const gameCanvas = new Canvas('canvas', 800, 600).add('app');
+
+        let backgroundCtx = backgroundCanvas.getCtx();
         let ctx = gameCanvas.getCtx();
 
         let game = new Game(gameCanvas, ctx).init();
@@ -53,8 +56,10 @@ window.addEventListener('load', function(){
 
             let frame = assets[myHero.currentFrame].frame;
             ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, myHero.position.x, myHero.position.y, frame.w, frame.h);
-            ctx.fillText(myHero.name, myHero.position.x, myHero.position.y);
 
+            if (!myHero.dead) {
+                ctx.fillText(myHero.name, myHero.position.x + 10, myHero.position.y - 10);
+            }
         };
 
     });

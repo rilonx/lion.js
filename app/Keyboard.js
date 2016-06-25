@@ -18,16 +18,16 @@ export default class Keyboard {
                 if (event.keyCode == this.SHIFT) {
                     this.isShift = true;
                 }
-                if (event.keyCode == this.KEY_LEFT) {
+                if (event.keyCode == this.KEY_UP) {
                     this.keyState[0] = true;
                 }
                 if (event.keyCode == this.KEY_RIGHT) {
                     this.keyState[1] = true;
                 }
-                if (event.keyCode == this.KEY_UP) {
+                if (event.keyCode == this.KEY_DOWN){
                     this.keyState[2] = true;
                 }
-                if (event.keyCode == this.KEY_DOWN){
+                if (event.keyCode == this.KEY_LEFT) {
                     this.keyState[3] = true;
                 }
             });
@@ -37,16 +37,16 @@ export default class Keyboard {
                 if (event.keyCode == this.SHIFT) {
                     this.isShift = false;
                 }
-                if(event.keyCode == this.KEY_LEFT){
+                if(event.keyCode == this.KEY_UP){
                     this.keyState[0] = false;
                 }
                 if(event.keyCode == this.KEY_RIGHT){
                     this.keyState[1] = false;
                 }
-                if(event.keyCode == this.KEY_UP){
+                if(event.keyCode == this.KEY_DOWN){
                     this.keyState[2] = false;
                 }
-                if(event.keyCode == this.KEY_DOWN){
+                if(event.keyCode == this.KEY_LEFT){
                     this.keyState[3] = false;
                 }
             });

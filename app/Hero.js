@@ -14,7 +14,7 @@ export default class Hero {
         this.lastDirection = 'e';
 
         this.currentFrame = 0;
-        this.durationFrame = 8;
+        this.durationFrame = 7;
 
         this.minFrame = 0;
         this.maxFrame = 7;
@@ -23,23 +23,13 @@ export default class Hero {
     update() {
 
         if (!this.dead) {
-            if (this.keyBoard.keyState[3]) {
 
-                //down
-                this.position.y += this.speed;
-                this.animate('s');
-            }
-            if (this.keyBoard.keyState[2]) {
+
+            if (this.keyBoard.keyState[0]) {
 
                 //up
                 this.position.y -= this.speed;
                 this.animate('n');
-            }
-            if (this.keyBoard.keyState[0]) {
-
-                //left
-                this.position.x -= this.speed;
-                this.animate('w');
             }
             if (this.keyBoard.keyState[1]) {
 
@@ -47,6 +37,19 @@ export default class Hero {
                 this.position.x += this.speed;
                 this.animate('e');
             }
+            if (this.keyBoard.keyState[2]) {
+
+                //down
+                this.position.y += this.speed;
+                this.animate('s');
+            }
+            if (this.keyBoard.keyState[3]) {
+
+                //left
+                this.position.x -= this.speed;
+                this.animate('w');
+            }
+
         }
 
         this.durationFrame --;
@@ -58,7 +61,7 @@ export default class Hero {
 
         if (this.durationFrame <= 0) {
 
-            this.durationFrame = 8;
+            this.durationFrame = 7;
 
             if (direction === 'e') {
                 this.minFrame = 0;
