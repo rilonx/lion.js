@@ -17,6 +17,7 @@ window.addEventListener('load', function(){
         let game = new Game().init();
         let keys = new Keyboard().init();
         let ctx = gameCanvas.getCtx();
+
         let handlers = {};
 
         game.draw(handlers);

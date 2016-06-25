@@ -5,46 +5,46 @@ export default class Game {
         this.pause = false;
         this.drawFunctions = null;
 
-        this.setPause = function(){
-            this.pause =! this.pause;
-            this.init();
-        };
+        return this;
+    }
 
-        this.draw = function(objArr){
-            this.drawFunctions = objArr;
-            if(!this.pause) {
-                for (let key in objArr) {
-                    objArr[key]();
-                }
+     setPause(){
+        this.pause =! this.pause;
+        this.init();
+    };
+
+    draw(objArr){
+        this.drawFunctions = objArr;
+        if(!this.pause) {
+            for (let key in objArr) {
+                objArr[key]();
+            }
+        }
+    };
+
+    init(){
+
+        let tick = (function(){
+            return requestAnimationFrame ||
+                webkitRequestAnimationFrame ||
+                mozRequestAnimationFrame ||
+                oRequestAnimationFrame ||
+                msRequestAnimationFrame ||
+                function(callback){
+                    setTimeout(callback, 1000 / 60);
+                };
+        })();
+
+        let loop = () => {
+            if (!this.pause) {
+                this.draw(this.drawFunctions);
+                tick(loop);
             }
         };
 
-        this.init = function(){
-
-            let tick = (function(){
-                return requestAnimationFrame ||
-                    webkitRequestAnimationFrame ||
-                    mozRequestAnimationFrame ||
-                    oRequestAnimationFrame ||
-                    msRequestAnimationFrame ||
-                    function(callback){
-                        setTimeout(callback, 1000 / 60);
-                    };
-            })();
-
-            let loop = () => {
-                if (!this.pause) {
-                    this.draw(this.drawFunctions);
-                    tick(loop);
-                }
-            };
-
-            tick(loop);
-
-            return this;
-        };
+        tick(loop);
 
         return this;
-    }
+    };
 
 }
