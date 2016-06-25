@@ -1,17 +1,19 @@
 export default class Game {
 
-    constructor() {
+    constructor(canvas, ctx) {
 
         this.pause = false;
         this.drawFunctions = null;
+        this.canvas = canvas;
+        this.ctx = ctx;
 
         return this;
     }
 
-     setPause(){
+     setPause() {
         this.pause =! this.pause;
         this.init();
-    };
+    }
 
     draw(objArr){
         this.drawFunctions = objArr;
@@ -20,7 +22,11 @@ export default class Game {
                 objArr[key]();
             }
         }
-    };
+    }
+
+    clear() {
+        this.ctx.clearRect(0, 0, this.canvas.canvas.width, this.canvas.canvas.height);
+    }
 
     init(){
 
@@ -45,6 +51,6 @@ export default class Game {
         tick(loop);
 
         return this;
-    };
+    }
 
 }

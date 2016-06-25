@@ -1,22 +1,22 @@
 window.DEV = true;
-import Converter from './library/Converter.js'
-import Canvas from './Canvas.js'
-import Game from './Game.js'
-import Keyboard from './Keyboard.js'
+import Converter from './library/Converter.js';
+import Canvas from './Canvas.js';
+import Game from './Game.js';
+import Keyboard from './Keyboard.js';
 import {assets} from "./assets.js";
+import Hero from './Hero.js';
 
 window.addEventListener('load', function(){
-    //console.log(Converter.xy2i(50,50,800));
 
     // loading assets
     assets.load(["app/assets/hero-1.png", "app/assets/hero-1.json"]).then(() => {
-        // End loading assets
+
         // Main game code
         const gameCanvas = new Canvas('canvas', 800, 600).add('app');
-
-        let game = new Game().init();
-        let keys = new Keyboard().init();
         let ctx = gameCanvas.getCtx();
+
+        let game = new Game(gameCanvas, ctx).init();
+        let keys = new Keyboard().init();
 
         let handlers = {};
 
@@ -29,71 +29,33 @@ window.addEventListener('load', function(){
             }
         });
 
-        let x = 50;
-        let y = 50;
-        let str = 'Lex';
         ctx.fillStyle = 'red';
         ctx.font="12px arial";
         let image = assets["app/assets/hero-1.png"];
 
-        function drawHero(){
+        let heroObj = {
+            name: 'Lex',
+            level: 1,
+            life: 5,
+            speed: 2,
+            position: {
+                x: 100,
+                y: 100
+            }
 
-        }
+        };
+
+        let myHero = new Hero(heroObj, keys);
 
         handlers.goHero = function(){
-            if(keys.keyState[3]){
-                let frame = assets[16].frame;
-                ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-                ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, x, y, frame.w, frame.h);
-                y +=2;
-            }
-            if(keys.keyState[2]){
-                let frame = assets[10].frame;
-                ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-                ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, x,y,frame.w, frame.h);
-                y -=2;
-            }
-            if(keys.keyState[0]){
-                let frame = assets[25].frame;
-                ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-                ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, x,y,frame.w, frame.h);
-                x -=2;
-            }
-            if(keys.keyState[1]){
-                let frame = assets[0].frame;
-                ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-                ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, x,y,frame.w, frame.h);
-                x +=2;
-            }
+
+            myHero.update();
+            game.clear();
+            let frame = assets[myHero.currentFrame].frame;
+            ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, myHero.position.x, myHero.position.y, frame.w, frame.h);
+            ctx.fillText(myHero.name, myHero.position.x, myHero.position.y-10);
+
         };
-
-        handlers.setText = function(){
-            ctx.fillText(str,x,y-10);
-        };
-
-
-        //odd.go = function(){
-        //    if(keys.keyState[3]){
-        //        ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-        //        ctx.fillText(str,x,y);
-        //        y +=2;
-        //    }
-        //    if(keys.keyState[2]){
-        //        ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-        //        ctx.fillText(str,x,y);
-        //        y -=2;
-        //    }
-        //    if(keys.keyState[0]){
-        //        ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-        //        ctx.fillText(str,x,y);
-        //        x -=2;
-        //    }
-        //    if(keys.keyState[1]){
-        //        ctx.clearRect(0,0,gameCanvas.canvas.width, gameCanvas.canvas.height);
-        //        ctx.fillText(str,x,y);
-        //        x +=2;
-        //    }
-        //};
 
     });
 
