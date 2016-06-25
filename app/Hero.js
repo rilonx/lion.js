@@ -5,6 +5,7 @@ export default class Hero {
         this.name = hero.name;
         this.level = hero.level;
         this.life = hero.life;
+        this.kills = hero.kills;
         this.speed = hero.speed;
         this.dead = false;
         this.position = hero.position;
@@ -24,30 +25,65 @@ export default class Hero {
 
         if (!this.dead) {
 
+            if (this.keyBoard.keyState[0] && this.keyBoard.keyState[1]) {
 
-            if (this.keyBoard.keyState[0]) {
+                //upRight
+                this.position.y -= this.speed / 1.2;
+                this.position.x += this.speed / 1.2;
+                this.animate('ne');
+                console.log('upRight');
+
+            } else if (this.keyBoard.keyState[1] && this.keyBoard.keyState[2]) {
+
+                // downRight
+                this.position.y += this.speed / 1.2;
+                this.position.x += this.speed / 1.2;
+                this.animate('se');
+                console.log('downRight');
+
+            } else if (this.keyBoard.keyState[2] && this.keyBoard.keyState[3]) {
+
+                // downLeft
+                this.position.y += this.speed / 1.2;
+                this.position.x -= this.speed / 1.2;
+                this.animate('sw');
+                console.log('downLeft');
+
+            } else if (this.keyBoard.keyState[3] && this.keyBoard.keyState[0]) {
+
+                // upLeft
+                this.position.y -= this.speed / 1.2;
+                this.position.x -= this.speed / 1.2;
+                this.animate('nw');
+                console.log('upLeft');
+
+            } else if (this.keyBoard.keyState[0]) {
 
                 //up
                 this.position.y -= this.speed;
                 this.animate('n');
-            }
-            if (this.keyBoard.keyState[1]) {
+                console.log('up');
+
+            } else if (this.keyBoard.keyState[1]) {
 
                 //right
                 this.position.x += this.speed;
                 this.animate('e');
-            }
-            if (this.keyBoard.keyState[2]) {
+                console.log('right');
+
+            } else if (this.keyBoard.keyState[2]) {
 
                 //down
                 this.position.y += this.speed;
                 this.animate('s');
-            }
-            if (this.keyBoard.keyState[3]) {
+                console.log('down');
+
+            } else if (this.keyBoard.keyState[3]) {
 
                 //left
                 this.position.x -= this.speed;
                 this.animate('w');
+                console.log('left');
             }
 
         }
@@ -71,13 +107,29 @@ export default class Hero {
                 this.minFrame = 8;
                 this.maxFrame = 15;
             }
-            if (direction === 's') {
+            if (direction === 'ne') {
                 this.minFrame = 16;
                 this.maxFrame = 23;
             }
-            if (direction === 'w') {
+            if (direction === 'nw') {
                 this.minFrame = 24;
                 this.maxFrame = 31;
+            }
+            if (direction === 's') {
+                this.minFrame = 32;
+                this.maxFrame = 39;
+            }
+            if (direction === 'se') {
+                this.minFrame = 40;
+                this.maxFrame = 47;
+            }
+            if (direction === 'sw') {
+                this.minFrame = 48;
+                this.maxFrame = 55;
+            }
+            if (direction === 'w') {
+                this.minFrame = 56;
+                this.maxFrame = 63;
             }
 
             if (this.currentFrame < this.maxFrame) {
