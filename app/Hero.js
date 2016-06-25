@@ -9,31 +9,87 @@ export default class Hero {
         this.dead = false;
         this.position = hero.position;
         this.keyBoard = keyBoard;
-        this.currentFrame = 16;
+
+        this.currentDirection = 'e';
+        this.lastDirection = 'e';
+
+        this.currentFrame = 0;
+        this.durationFrame = 8;
+
+        this.minFrame = 0;
+        this.maxFrame = 7;
     }
 
-    update(){
+    update() {
 
         if (!this.dead) {
-            if(this.keyBoard.keyState[3]){
+            if (this.keyBoard.keyState[3]) {
+
+                //down
                 this.position.y += this.speed;
-                this.currentFrame = 16;
+                this.animate('s');
             }
-            if(this.keyBoard.keyState[2]){
+            if (this.keyBoard.keyState[2]) {
+
+                //up
                 this.position.y -= this.speed;
-                this.currentFrame = 10;
+                this.animate('n');
             }
-            if(this.keyBoard.keyState[0]){
+            if (this.keyBoard.keyState[0]) {
+
+                //left
                 this.position.x -= this.speed;
-                this.currentFrame = 25;
+                this.animate('w');
             }
-            if(this.keyBoard.keyState[1]){
+            if (this.keyBoard.keyState[1]) {
+
+                //right
                 this.position.x += this.speed;
-                this.currentFrame = 0;
+                this.animate('e');
             }
         }
 
+        this.durationFrame --;
     }
 
+    animate(direction) {
 
+        this.currentDirection = direction;
+
+        if (this.durationFrame <= 0) {
+
+            this.durationFrame = 8;
+
+            if (direction === 'e') {
+                this.minFrame = 0;
+                this.maxFrame = 7;
+            }
+            if (direction === 'n') {
+                this.minFrame = 8;
+                this.maxFrame = 15;
+            }
+            if (direction === 's') {
+                this.minFrame = 16;
+                this.maxFrame = 23;
+            }
+            if (direction === 'w') {
+                this.minFrame = 24;
+                this.maxFrame = 31;
+            }
+
+            if (this.currentFrame < this.maxFrame) {
+
+                if (this.lastDirection === this.currentDirection) {
+                    this.currentFrame ++;
+                    this.lastDirection = direction;
+                } else {
+                    this.currentFrame = this.minFrame;
+                    this.lastDirection = direction;
+                }
+
+            } else {
+                this.currentFrame = this.minFrame;
+            }
+        }
+    }
 }

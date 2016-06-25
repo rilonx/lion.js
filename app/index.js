@@ -1,4 +1,3 @@
-window.DEV = true;
 import Converter from './library/Converter.js';
 import Canvas from './Canvas.js';
 import Game from './Game.js';
@@ -51,9 +50,10 @@ window.addEventListener('load', function(){
 
             myHero.update();
             game.clear();
+
             let frame = assets[myHero.currentFrame].frame;
             ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, myHero.position.x, myHero.position.y, frame.w, frame.h);
-            ctx.fillText(myHero.name, myHero.position.x, myHero.position.y-10);
+            ctx.fillText(myHero.name, myHero.position.x, myHero.position.y);
 
         };
 
