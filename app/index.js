@@ -18,18 +18,12 @@ window.addEventListener('load', function(){
         let ctx = gameCanvas.getCtx();
 
         let game = new Game(gameCanvas, ctx).init();
-        let keys = new Keyboard().init();
+        let keys = new Keyboard().init(game);
 
         let handlers = {};
+        let bodyes = [];
 
         game.draw(handlers);
-
-        document.addEventListener('keydown', function(event){
-
-            if (event.keyCode == 80) {
-                game.setPause();
-            }
-        });
 
         ctx.fillStyle = 'red';
         ctx.font="12px arial";
@@ -48,19 +42,28 @@ window.addEventListener('load', function(){
         };
 
         let myHero = new Hero(heroObj, keys);
+        bodyes.push(myHero);
 
-        handlers.goHero = function(){
+        handlers.updateHandler = function(){
 
-            myHero.update();
+            // update all data heroes
+            for(let i = 0; i < bodyes.length; i++) {
+                bodyes[i].update();
+            }
+        };
+
+        handlers.drawHandler = function() {
+            // clear canvas
             game.clear();
 
+            // draw all heroes
             let frame = assets[myHero.currentFrame].frame;
             ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h, myHero.position.x, myHero.position.y, frame.w, frame.h);
 
             if (!myHero.dead) {
                 ctx.fillText(myHero.name, myHero.position.x + 10, myHero.position.y - 10);
             }
-        };
+        }
 
     });
 
