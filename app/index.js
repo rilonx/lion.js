@@ -64,6 +64,7 @@ window.addEventListener('load', function(){
             for(let i = 0; i < bodyes.length; i++) {
                 bodyes[i].update();
             }
+
         };
 
         handlers.drawHandler = function() {

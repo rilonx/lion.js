@@ -16,6 +16,11 @@ export default class Hero {
 
         this.currentFrame = 104;
         this.durationFrame = 7;
+        this.attackCounter = 10;
+        this.attackSpeed = 3;
+        this.isAttack = false;
+
+        this.stepCounter = 7;
 
         this.minFrame = 104;
         this.maxFrame = 111;
@@ -84,18 +89,49 @@ export default class Hero {
                 this.position.x -= this.speed;
                 this.animate('w');
                 console.log('left');
+
+            } else if (this.keyBoard.isShift) {
+
+                //attack
+                this.animate('attack');
+                this.isAttack = true;
+                console.log('attack');
+
             }
 
         }
 
-        this.durationFrame --;
+        if (this.isAttack && this.attackSpeed <= 0) {
+
+            if (this.attackCounter === 1) {
+                this.currentFrame = 0;
+                this.minFrame = 0;
+                this.maxFrame = 11;
+            }
+            this.attackCounter --;
+
+
+            if (this.currentFrame < this.maxFrame) {
+
+                this.currentFrame ++;
+
+            } else {
+                this.isAttack = false;
+                this.attackCounter = 1;
+            }
+
+            this.attackSpeed = 3;
+        }
+
+        this.attackSpeed--;
+        this.durationFrame <= 0 ? this.durationFrame = 6 : this.durationFrame--;
     }
 
     animate(direction) {
 
         this.currentDirection = direction;
 
-        if (this.durationFrame <= 0) {
+        if (direction != 'attack' && this.durationFrame <= 0) {
 
             this.durationFrame = 7;
 
@@ -146,5 +182,6 @@ export default class Hero {
                 this.currentFrame = this.minFrame;
             }
         }
+
     }
 }
