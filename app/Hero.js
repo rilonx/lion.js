@@ -14,11 +14,11 @@ export default class Hero {
         this.currentDirection = 'e';
         this.lastDirection = 'e';
 
-        this.currentFrame = 0;
+        this.currentFrame = 104;
         this.durationFrame = 7;
 
-        this.minFrame = 0;
-        this.maxFrame = 7;
+        this.minFrame = 104;
+        this.maxFrame = 111;
     }
 
     update() {
