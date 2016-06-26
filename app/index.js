@@ -8,7 +8,7 @@ import Hero from './Hero.js';
 window.addEventListener('load', function(){
 
     // loading assets
-    assets.load(["app/assets/hero-2.png", "app/assets/hero-2.json"]).then(() => {
+    assets.load(["app/assets/hero-1.png", "app/assets/hero-1.json"]).then(() => {
         console.log(assets);
         // Main game code
         const backgroundCanvas = new Canvas('BackgroundCanvas', 800, 600).add('app');
@@ -27,7 +27,7 @@ window.addEventListener('load', function(){
 
         ctx.fillStyle = 'red';
         ctx.font="12px arial";
-        let image = assets["app/assets/hero-2.png"];
+        let image = assets["app/assets/hero-1.png"];
 
         let heroObj = {
             name: 'Lex',

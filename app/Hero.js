@@ -100,36 +100,36 @@ export default class Hero {
             this.durationFrame = 7;
 
             if (direction === 'e') {
-                this.minFrame = 0;
-                this.maxFrame = 7;
+                this.minFrame = 104;
+                this.maxFrame = 111;
             }
             if (direction === 'n') {
-                this.minFrame = 8;
-                this.maxFrame = 15;
+                this.minFrame = 112;
+                this.maxFrame = 119;
             }
             if (direction === 'ne') {
-                this.minFrame = 16;
-                this.maxFrame = 23;
+                this.minFrame = 120;
+                this.maxFrame = 127;
             }
             if (direction === 'nw') {
-                this.minFrame = 24;
-                this.maxFrame = 31;
+                this.minFrame = 128;
+                this.maxFrame = 135;
             }
             if (direction === 's') {
-                this.minFrame = 32;
-                this.maxFrame = 39;
+                this.minFrame = 136;
+                this.maxFrame = 143;
             }
             if (direction === 'se') {
-                this.minFrame = 40;
-                this.maxFrame = 47;
+                this.minFrame = 144;
+                this.maxFrame = 151;
             }
             if (direction === 'sw') {
-                this.minFrame = 48;
-                this.maxFrame = 55;
+                this.minFrame = 152;
+                this.maxFrame = 159;
             }
             if (direction === 'w') {
-                this.minFrame = 56;
-                this.maxFrame = 63;
+                this.minFrame = 160;
+                this.maxFrame = 167;
             }
 
             if (this.currentFrame < this.maxFrame) {
