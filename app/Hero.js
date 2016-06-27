@@ -104,9 +104,41 @@ export default class Hero {
         if (this.isAttack && this.attackSpeed <= 0) {
 
             if (this.attackCounter === 1) {
-                this.currentFrame = 0;
-                this.minFrame = 0;
-                this.maxFrame = 11;
+
+                if (this.lastDirection === 'e') {
+                    this.minFrame = 0;
+                    this.maxFrame = 12;
+                }
+                if (this.lastDirection === 'n') {
+                    this.minFrame = 13;
+                    this.maxFrame = 25;
+                }
+                if (this.lastDirection === 'ne') {
+                    this.minFrame = 26;
+                    this.maxFrame = 38;
+                }
+                if (this.lastDirection === 'nw') {
+                    this.minFrame = 39;
+                    this.maxFrame = 51;
+                }
+                if (this.lastDirection === 's') {
+                    this.minFrame = 52;
+                    this.maxFrame = 64;
+                }
+                if (this.lastDirection === 'se') {
+                    this.minFrame = 65;
+                    this.maxFrame = 77;
+                }
+                if (this.lastDirection === 'sw') {
+                    this.minFrame = 78;
+                    this.maxFrame = 90;
+                }
+                if (this.lastDirection === 'w') {
+                    this.minFrame = 91;
+                    this.maxFrame = 103;
+                }
+
+                this.currentFrame = this.minFrame;
             }
             this.attackCounter --;
 
